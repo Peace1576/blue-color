@@ -26,11 +26,11 @@ const FAQS = [
   },
   {
     q: 'I am a small contractor. Are these contracts for me?',
-    a: 'Yes. A large portion of federal trade contracts are set aside exclusively for small businesses. You can filter by set-aside type — small business, veteran-owned, woman-owned, HUBZone — so you only see contracts you are eligible to bid.',
+    a: 'Yes. A large portion of federal trade contracts are set aside exclusively for small businesses. You can filter by set-aside type — small business, veteran-owned, woman-owned, HUBZone — so you only see contracts you are eligible to bid on.',
   },
   {
     q: 'Do I need a SAM.gov registration to bid?',
-    a: 'To actually submit a bid to the federal government you will need a SAM.gov entity registration (free). BlueCollar Bids helps you find and track the opportunities — the registration is a one-time step on your end.',
+    a: 'To actually submit a bid to the federal government, you will need a SAM.gov entity registration (free). BlueCollar Bids helps you find and track the opportunities — the registration is a one-time step on your end.',
   },
   {
     q: 'Can I cancel anytime?',
@@ -162,8 +162,9 @@ export default function LandingPage() {
               manually takes hours. Most tradespeople never check it at all.
             </p>
             <p className="text-gray-400 leading-relaxed mb-4">
-              Meanwhile, larger firms with dedicated bid-chasers scoop up small-business
-              set-aside contracts that were meant for independent contractors like you.
+              Meanwhile, larger firms with dedicated in-house estimators scoop up
+              small-business set-aside contracts that were meant for independent
+              contractors like you.
             </p>
             <p className="text-gray-300 font-medium">
               BlueCollar Bids pulls every relevant posting, filters it to your trade and
@@ -189,7 +190,7 @@ export default function LandingPage() {
               },
               {
                 step: '02',
-                title: 'You filter to what matters',
+                title: 'You filter for what matters',
                 desc: 'Filter by trade category, state, set-aside type (small business, veteran-owned, woman-owned), and response deadline. Save your filters and check back daily in under two minutes.',
               },
               {
@@ -217,7 +218,7 @@ export default function LandingPage() {
             <p className="text-gray-400 leading-relaxed mb-8">
               We track the 10 NAICS codes that cover the majority of blue-collar federal
               contract work. If your license type is listed below, there are active
-              government contracts looking for you right now.
+              government contracts available for your trade right now.
             </p>
             <div className="grid grid-cols-2 gap-3">
               {TRADES.map((t) => (
@@ -264,7 +265,7 @@ export default function LandingPage() {
             {[
               {
                 title: 'Live contract dashboard',
-                desc: 'A filtered, sortable table of active opportunities. Updated every 6 hours. No login required after signup.',
+                desc: 'A filtered, sortable table of active opportunities. Updated every 6 hours. Accessible from any device after signup.',
               },
               {
                 title: 'Trade-specific filtering',
@@ -276,7 +277,7 @@ export default function LandingPage() {
               },
               {
                 title: 'Set-aside visibility',
-                desc: 'See which contracts are reserved for small businesses, veteran-owned, woman-owned, or HUBZone firms. Many of these go unbid.',
+                desc: 'See which contracts are reserved for small businesses, veteran-owned, woman-owned, or HUBZone firms. Many of these receive no competing bids at all.',
               },
               {
                 title: 'Deadline tracking',
@@ -312,7 +313,7 @@ export default function LandingPage() {
               <span className="text-5xl font-extrabold">$150</span>
               <span className="text-gray-400 pb-2">/ month</span>
             </div>
-            <p className="text-gray-400 text-sm mb-8">Cancel anytime. No contracts. No setup fees.</p>
+            <p className="text-gray-400 text-sm mb-8">Cancel anytime. No long-term commitment. No setup fees.</p>
 
             <ul className="space-y-3 mb-10">
               {[
