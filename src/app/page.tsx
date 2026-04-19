@@ -41,6 +41,7 @@ const FAQS = [
 export default function LandingPage() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [agreed, setAgreed] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   async function handleCheckout(e: React.FormEvent) {
@@ -334,22 +335,50 @@ export default function LandingPage() {
               ))}
             </ul>
 
-            <form onSubmit={handleCheckout} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                className="flex-1 bg-gray-950 border border-gray-700 rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-orange-500 hover:bg-orange-400 disabled:opacity-60 text-white font-semibold px-7 py-3.5 rounded-lg transition-colors whitespace-nowrap"
-              >
-                {loading ? 'Redirecting...' : 'Get Access'}
-              </button>
+            <form onSubmit={handleCheckout} className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  className="flex-1 bg-gray-950 border border-gray-700 rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
+                />
+                <button
+                  type="submit"
+                  disabled={loading || !agreed}
+                  className="bg-orange-500 hover:bg-orange-400 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-7 py-3.5 rounded-lg transition-colors whitespace-nowrap"
+                >
+                  {loading ? 'Redirecting...' : 'Get Access'}
+                </button>
+              </div>
+
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  required
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-orange-500 shrink-0"
+                />
+                <span className="text-xs text-gray-400 leading-relaxed">
+                  I have read and agree to the{' '}
+                  <a href="/legal/terms" target="_blank" className="text-orange-500 hover:text-orange-400 underline">
+                    Terms of Use
+                  </a>
+                  ,{' '}
+                  <a href="/legal/privacy" target="_blank" className="text-orange-500 hover:text-orange-400 underline">
+                    Privacy Policy
+                  </a>
+                  , and{' '}
+                  <a href="/legal/acceptable-use" target="_blank" className="text-orange-500 hover:text-orange-400 underline">
+                    Acceptable Use Policy
+                  </a>
+                  . I understand that BlueCollar Bids is an information tool only and does not
+                  guarantee contract awards or bid outcomes.
+                </span>
+              </label>
             </form>
             <p className="text-xs text-gray-600 mt-3 text-center">
               Secured by Stripe. You will be taken to a secure checkout page.
@@ -421,20 +450,29 @@ export default function LandingPage() {
 
       {/* ── FOOTER ── */}
       <footer className="border-t border-white/5 py-10 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <span className="font-bold">BlueCollar</span>
-            <span className="font-bold text-orange-500">Bids</span>
+        <div className="max-w-6xl mx-auto space-y-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <span className="font-bold">BlueCollar</span>
+              <span className="font-bold text-orange-500">Bids</span>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
+              <a href="#how-it-works" className="hover:text-gray-300 transition-colors">How It Works</a>
+              <a href="#pricing" className="hover:text-gray-300 transition-colors">Pricing</a>
+              <a href="#faq" className="hover:text-gray-300 transition-colors">FAQ</a>
+              <a href="/dashboard" className="hover:text-gray-300 transition-colors">Dashboard</a>
+            </div>
           </div>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#how-it-works" className="hover:text-gray-300 transition-colors">How It Works</a>
-            <a href="#pricing" className="hover:text-gray-300 transition-colors">Pricing</a>
-            <a href="#faq" className="hover:text-gray-300 transition-colors">FAQ</a>
-            <a href="/dashboard" className="hover:text-gray-300 transition-colors">Dashboard</a>
+          <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-600">
+              <a href="/legal/terms" className="hover:text-gray-400 transition-colors">Terms of Use</a>
+              <a href="/legal/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
+              <a href="/legal/acceptable-use" className="hover:text-gray-400 transition-colors">Acceptable Use Policy</a>
+            </div>
+            <p className="text-xs text-gray-600 text-center">
+              Data sourced from SAM.gov. Not affiliated with the U.S. Government. &copy; {new Date().getFullYear()} BlueCollar Bids.
+            </p>
           </div>
-          <p className="text-xs text-gray-600">
-            Data sourced from SAM.gov. Not affiliated with the U.S. Government.
-          </p>
         </div>
       </footer>
     </main>
