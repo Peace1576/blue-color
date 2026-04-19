@@ -131,8 +131,8 @@ export default function AcceptableUsePolicy() {
             <h2 className="text-xl font-semibold text-white mb-3">7. Reporting Violations</h2>
             <p>
               If you become aware of any misuse of the Service, please report it to{' '}
-              <a href="mailto:mwambatchishi@gmail.com" className="text-orange-500 hover:text-orange-400">
-                mwambatchishi@gmail.com
+              <a href="mailto:theonthor8@gmail.com" className="text-orange-500 hover:text-orange-400">
+                theonthor8@gmail.com
               </a>.
             </p>
           </section>

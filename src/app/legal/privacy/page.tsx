@@ -114,8 +114,8 @@ export default function PrivacyPolicy() {
             </ul>
             <p className="mt-3">
               To exercise any of these rights, contact us at{' '}
-              <a href="mailto:mwambatchishi@gmail.com" className="text-orange-500 hover:text-orange-400">
-                mwambatchishi@gmail.com
+              <a href="mailto:theonthor8@gmail.com" className="text-orange-500 hover:text-orange-400">
+                theonthor8@gmail.com
               </a>. We will respond within 30 days.
             </p>
           </section>
@@ -153,8 +153,8 @@ export default function PrivacyPolicy() {
             <h2 className="text-xl font-semibold text-white mb-3">11. Contact</h2>
             <p>
               Privacy-related questions or requests may be directed to:{' '}
-              <a href="mailto:mwambatchishi@gmail.com" className="text-orange-500 hover:text-orange-400">
-                mwambatchishi@gmail.com
+              <a href="mailto:theonthor8@gmail.com" className="text-orange-500 hover:text-orange-400">
+                theonthor8@gmail.com
               </a>
             </p>
           </section>
