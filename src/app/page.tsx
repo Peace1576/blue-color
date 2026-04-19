@@ -147,7 +147,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <img
-              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"
+              src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80"
               alt="Construction workers on site"
               className="rounded-xl object-cover w-full h-80"
             />
