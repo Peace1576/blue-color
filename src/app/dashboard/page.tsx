@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 interface Bid {
   id: string;
@@ -40,6 +40,7 @@ export default function DashboardPage() {
   useEffect(() => {
     async function load() {
       setLoading(true);
+      const supabase = getSupabase();
       let query = supabase
         .from('bids')
         .select('*')
