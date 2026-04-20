@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
+import Link from 'next/link';
 
 interface Bid {
   id: string;
@@ -36,8 +37,28 @@ export default function DashboardPage() {
   const [bids, setBids] = useState<Bid[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState({ naics: '', state: '' });
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
 
   useEffect(() => {
+    async function checkAccess() {
+      const supabase = getSupabase();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setAuthorized(false); setLoading(false); return; }
+
+      const { data: sub } = await supabase
+        .from('subscribers')
+        .select('status')
+        .eq('email', user.email)
+        .single();
+
+      setAuthorized(sub?.status === 'active');
+      setLoading(false);
+    }
+    checkAccess();
+  }, []);
+
+  useEffect(() => {
+    if (!authorized) return;
     async function load() {
       setLoading(true);
       const supabase = getSupabase();
@@ -56,17 +77,47 @@ export default function DashboardPage() {
       setLoading(false);
     }
     load();
-  }, [filter]);
+  }, [filter, authorized]);
+
+  if (authorized === null || (loading && authorized === null)) {
+    return (
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <p className="text-gray-500">Loading…</p>
+      </div>
+    );
+  }
+
+  if (authorized === false) {
+    return (
+      <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center gap-6 px-6">
+        <h1 className="text-3xl font-bold">Access Required</h1>
+        <p className="text-gray-400 text-center max-w-md">
+          You need an active BlueCollar Bids subscription to access the dashboard.
+        </p>
+        <Link
+          href="/#pricing"
+          className="bg-orange-500 hover:bg-orange-400 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+        >
+          Get Access — $150 / month
+        </Link>
+        <Link href="/" className="text-sm text-gray-600 hover:text-gray-400 transition-colors">
+          Back to home
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <header className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-        <span className="text-xl font-bold text-orange-500">BlueCollar Bids</span>
+        <Link href="/" className="text-xl font-bold">
+          <span className="text-white">BlueCollar</span>
+          <span className="text-orange-500">Bids</span>
+        </Link>
         <span className="text-sm text-gray-400">Dashboard</span>
       </header>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Filters */}
         <div className="flex flex-wrap gap-4 mb-8">
           <select
             value={filter.naics}
@@ -91,7 +142,6 @@ export default function DashboardPage() {
           </span>
         </div>
 
-        {/* Table */}
         <div className="overflow-x-auto rounded-xl border border-gray-800">
           <table className="w-full text-sm">
             <thead className="bg-gray-900 text-gray-400">

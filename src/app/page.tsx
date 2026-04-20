@@ -75,6 +75,7 @@ export default function LandingPage() {
             <a href="#what-you-get" className="hover:text-white transition-colors">What You Get</a>
             <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
             <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+            <a href="/blog" className="hover:text-white transition-colors">Blog</a>
           </div>
           <a
             href="#pricing"
@@ -460,6 +461,7 @@ export default function LandingPage() {
               <a href="#how-it-works" className="hover:text-gray-300 transition-colors">How It Works</a>
               <a href="#pricing" className="hover:text-gray-300 transition-colors">Pricing</a>
               <a href="#faq" className="hover:text-gray-300 transition-colors">FAQ</a>
+              <a href="/blog" className="hover:text-gray-300 transition-colors">Blog</a>
               <a href="/dashboard" className="hover:text-gray-300 transition-colors">Dashboard</a>
             </div>
           </div>
