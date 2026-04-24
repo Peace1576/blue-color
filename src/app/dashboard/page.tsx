@@ -116,7 +116,7 @@ export default function DashboardPage() {
         </Link>
         <div className="flex items-center gap-4">
           <span className="text-sm text-gray-400">Dashboard</span>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         </div>
       </header>
 
