@@ -100,19 +100,7 @@ function mapToRow(opp: SamOpportunity) {
   };
 }
 
-export async function POST(req: NextRequest) {
-  // Auth: Vercel Cron sends Authorization: Bearer <CRON_SECRET>, we also accept x-ingest-secret
-  const authHeader = req.headers.get('authorization');
-  const ingestHeader = req.headers.get('x-ingest-secret');
-  const cronSecret = process.env.CRON_SECRET;
-
-  const validCron = cronSecret && authHeader === `Bearer ${cronSecret}`;
-  const validManual = ingestHeader === INGEST_SECRET;
-
-  if (!validCron && !validManual) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+async function runIngest() {
   const apiKey = process.env.SAM_GOV_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: 'SAM_GOV_API_KEY not set' }, { status: 500 });
@@ -151,7 +139,7 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Mark old bids inactive (posted > 90 days ago with expired deadlines)
+  // Mark old bids inactive (response_deadline > 90 days ago)
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - 90);
   await db
@@ -169,16 +157,32 @@ export async function POST(req: NextRequest) {
   });
 }
 
-// GET: health check — returns last run stats without auth
-export async function GET() {
+function isAuthorized(req: NextRequest): boolean {
+  const authHeader = req.headers.get('authorization');
+  const ingestHeader = req.headers.get('x-ingest-secret');
+  const cronSecret = process.env.CRON_SECRET;
+  return (!!cronSecret && authHeader === `Bearer ${cronSecret}`) ||
+    ingestHeader === INGEST_SECRET;
+}
+
+// GET: Vercel Cron calls GET — run ingest if authorized, else return health check
+export async function GET(req: NextRequest) {
+  if (isAuthorized(req)) {
+    return runIngest();
+  }
+  // Public health check
   const db = supabaseAdmin();
   const { count } = await db
     .from('bids')
     .select('*', { count: 'exact', head: true })
     .eq('active', true);
+  return NextResponse.json({ activeBids: count ?? 0, timestamp: new Date().toISOString() });
+}
 
-  return NextResponse.json({
-    activeBids: count ?? 0,
-    timestamp: new Date().toISOString(),
-  });
+// POST: manual trigger (curl, admin tool, etc.)
+export async function POST(req: NextRequest) {
+  if (!isAuthorized(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  return runIngest();
 }

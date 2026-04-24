@@ -11,7 +11,12 @@ export default function SubscribePage() {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    if (!isLoaded || !user) return;
+    if (!isLoaded) return;
+    if (!user) {
+      // Not signed in — stop the spinner so the page renders
+      setChecking(false);
+      return;
+    }
     async function checkSub() {
       const supabase = getSupabase();
       const email = user?.primaryEmailAddress?.emailAddress;

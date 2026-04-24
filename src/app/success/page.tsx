@@ -4,8 +4,8 @@ export default function SuccessPage() {
       <div className="text-6xl mb-6">🎉</div>
       <h1 className="text-4xl font-bold mb-4">You&apos;re in!</h1>
       <p className="text-gray-400 text-lg max-w-md">
-        Your subscription is active. Check your inbox — you&apos;ll get an email with
-        your dashboard link within the next few minutes.
+        Your subscription is active. Head to your dashboard to start browsing live
+        federal contracts — updated every 6 hours from SAM.gov.
       </p>
       <a
         href="/dashboard"
