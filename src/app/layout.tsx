@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: 'BlueCollar Bids — Government contracts for trades workers',
   description:
     'Get notified the moment a federal or state government contract is posted that matches your trade. Electricians, plumbers, HVAC, concrete, and more.',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
