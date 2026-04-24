@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/ingest-bids",
+      "schedule": "0 */6 * * *"
+    }
+  ]
+}
