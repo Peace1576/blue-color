@@ -93,7 +93,7 @@ export default function SignUpPage() {
                 formFieldErrorText: 'text-red-400 text-xs',
               },
             }}
-            forceRedirectUrl="/subscribe"
+            forceRedirectUrl="/dashboard"
           />
 
           <p className="text-xs text-gray-600 text-center mt-6">
