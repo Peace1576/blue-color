@@ -1,10 +1,12 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/subscribe(.*)']);
+export default clerkMiddleware(async (auth, req: NextRequest) => {
+  const path = req.nextUrl.pathname;
+  const isProtected = path.startsWith('/dashboard') || path.startsWith('/subscribe');
 
-export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) {
+  if (isProtected) {
     const { userId } = await auth();
     if (!userId) {
       const signInUrl = new URL('/sign-in', req.url);
@@ -15,8 +17,12 @@ export default clerkMiddleware(async (auth, req) => {
 });
 
 export const config = {
+  // Only run middleware on protected routes + API — NOT on homepage or public pages
   matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/dashboard/:path*',
+    '/subscribe/:path*',
+    '/dashboard',
+    '/subscribe',
     '/(api|trpc)(.*)',
   ],
 };
