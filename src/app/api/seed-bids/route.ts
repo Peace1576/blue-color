@@ -8,6 +8,10 @@ export const dynamic = 'force-dynamic';
 
 const SECRET = 'bluecollarbids-setup-2024';
 
+// SAM.gov search URLs by NAICS — "View" opens live search results for that trade
+const SAM_SEARCH = (naics: string) =>
+  `https://sam.gov/search/?keywords=&index=opp&is_active=true&naics=${naics}`;
+
 const SAMPLE_BIDS = [
   {
     notice_id: 'W9126G24R0072',
@@ -20,7 +24,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'TX',
     place_of_performance_city: 'El Paso',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/W9126G24R0072/view',
+    ui_link: SAM_SEARCH('238210'),
     active: true,
   },
   {
@@ -34,7 +38,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'AZ',
     place_of_performance_city: 'Phoenix',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/VA25800R0148/view',
+    ui_link: SAM_SEARCH('238220'),
     active: true,
   },
   {
@@ -48,7 +52,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'CA',
     place_of_performance_city: 'San Diego',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/N6247324R4301/view',
+    ui_link: SAM_SEARCH('238110'),
     active: true,
   },
   {
@@ -62,7 +66,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'TX',
     place_of_performance_city: 'Dallas',
     contract_type: 'Indefinite Delivery',
-    ui_link: 'https://sam.gov/opp/GS11P24LAC0004/view',
+    ui_link: SAM_SEARCH('238120'),
     active: true,
   },
   {
@@ -76,7 +80,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'DC',
     place_of_performance_city: 'Washington',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/70CDCR24R00014/view',
+    ui_link: SAM_SEARCH('238320'),
     active: true,
   },
   {
@@ -90,7 +94,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'KY',
     place_of_performance_city: 'Louisville',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/W912DY24R0039/view',
+    ui_link: SAM_SEARCH('238910'),
     active: true,
   },
   {
@@ -104,7 +108,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'AZ',
     place_of_performance_city: 'Tucson',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/70B04C24R00007/view',
+    ui_link: SAM_SEARCH('238330'),
     active: true,
   },
   {
@@ -118,7 +122,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'MO',
     place_of_performance_city: 'Kansas City',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/GS07P24LAC0011/view',
+    ui_link: SAM_SEARCH('238310'),
     active: true,
   },
   {
@@ -132,7 +136,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'TN',
     place_of_performance_city: 'Fort Campbell',
     contract_type: 'Indefinite Delivery',
-    ui_link: 'https://sam.gov/opp/W9124L24R0023/view',
+    ui_link: SAM_SEARCH('238350'),
     active: true,
   },
   {
@@ -146,7 +150,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'FL',
     place_of_performance_city: 'Eglin AFB',
     contract_type: 'Design-Build',
-    ui_link: 'https://sam.gov/opp/FA301524R0019/view',
+    ui_link: SAM_SEARCH('236220'),
     active: true,
   },
   {
@@ -160,7 +164,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'TX',
     place_of_performance_city: 'Killeen',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/W91151H24R0044/view',
+    ui_link: SAM_SEARCH('238210'),
     active: true,
   },
   {
@@ -174,7 +178,7 @@ const SAMPLE_BIDS = [
     place_of_performance_state: 'CA',
     place_of_performance_city: 'Long Beach',
     contract_type: 'Firm Fixed Price',
-    ui_link: 'https://sam.gov/opp/VA25019R0214/view',
+    ui_link: SAM_SEARCH('238220'),
     active: true,
   },
 ];
