@@ -22,8 +22,7 @@ export default function SignUpPage() {
             formButtonPrimary: 'bg-orange-500 hover:bg-orange-400',
           },
         }}
-        redirectUrl="/subscribe"
-        afterSignUpUrl="/subscribe"
+        forceRedirectUrl="/subscribe"
       />
     </div>
   );
