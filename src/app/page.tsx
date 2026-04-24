@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+// Trades list
 const TRADES = [
   { code: '238210', label: 'Electrical' },
   { code: '238220', label: 'Plumbing & HVAC' },
@@ -39,26 +40,7 @@ const FAQS = [
 ];
 
 export default function LandingPage() {
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [agreed, setAgreed] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  async function handleCheckout(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const { url } = await res.json();
-      if (url) window.location.href = url;
-    } catch {
-      setLoading(false);
-    }
-  }
 
   return (
     <main className="min-h-screen bg-gray-950 text-white">
@@ -78,7 +60,7 @@ export default function LandingPage() {
             <a href="/blog" className="hover:text-white transition-colors">Blog</a>
           </div>
           <a
-            href="#pricing"
+            href="/sign-up"
             className="bg-orange-500 hover:bg-orange-400 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
           >
             Get Access
@@ -116,7 +98,7 @@ export default function LandingPage() {
                 See How It Works
               </a>
               <a
-                href="#pricing"
+                href="/sign-up"
                 className="bg-orange-500 hover:bg-orange-400 text-white font-semibold px-6 py-3.5 rounded-lg transition-colors text-center"
               >
                 Start for $150 / month
@@ -336,53 +318,14 @@ export default function LandingPage() {
               ))}
             </ul>
 
-            <form onSubmit={handleCheckout} className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="flex-1 bg-gray-950 border border-gray-700 rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
-                />
-                <button
-                  type="submit"
-                  disabled={loading || !agreed}
-                  className="bg-orange-500 hover:bg-orange-400 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-7 py-3.5 rounded-lg transition-colors whitespace-nowrap"
-                >
-                  {loading ? 'Redirecting...' : 'Get Access'}
-                </button>
-              </div>
-
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  required
-                  checked={agreed}
-                  onChange={(e) => setAgreed(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 accent-orange-500 shrink-0"
-                />
-                <span className="text-xs text-gray-400 leading-relaxed">
-                  I have read and agree to the{' '}
-                  <a href="/legal/terms" target="_blank" className="text-orange-500 hover:text-orange-400 underline">
-                    Terms of Use
-                  </a>
-                  ,{' '}
-                  <a href="/legal/privacy" target="_blank" className="text-orange-500 hover:text-orange-400 underline">
-                    Privacy Policy
-                  </a>
-                  , and{' '}
-                  <a href="/legal/acceptable-use" target="_blank" className="text-orange-500 hover:text-orange-400 underline">
-                    Acceptable Use Policy
-                  </a>
-                  . I understand that BlueCollar Bids is an information tool only and does not
-                  guarantee contract awards or bid outcomes.
-                </span>
-              </label>
-            </form>
-            <p className="text-xs text-gray-600 mt-3 text-center">
-              Secured by Stripe. You will be taken to a secure checkout page.
+            <a
+              href="/sign-up"
+              className="block w-full text-center bg-orange-500 hover:bg-orange-400 text-white font-bold py-4 rounded-lg transition-colors text-lg"
+            >
+              Create Account — Get Started
+            </a>
+            <p className="text-xs text-gray-500 mt-3 text-center">
+              Create your free account first, then subscribe. Secured by Stripe.
             </p>
           </div>
         </div>
@@ -440,7 +383,7 @@ export default function LandingPage() {
               few hours. Make sure you see it before your competition does.
             </p>
             <a
-              href="#pricing"
+              href="/sign-up"
               className="inline-block bg-orange-500 hover:bg-orange-400 text-white font-semibold px-8 py-4 rounded-lg transition-colors"
             >
               Get Access — $150 / month
